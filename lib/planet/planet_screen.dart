@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shopping_cart/bloc_provider.dart';
-import 'package:flutter_shopping_cart/planet_bloc.dart';
-import 'package:flutter_shopping_cart/planet_model.dart';
-import 'package:flutter_shopping_cart/planet_query_bloc.dart';
+import 'package:flutter_shopping_cart/core/bloc_provider.dart';
+import 'package:flutter_shopping_cart/planet/planet_bloc.dart';
+import 'package:flutter_shopping_cart/planet/planet_model.dart';
+import 'package:flutter_shopping_cart/planet/planet_query_bloc.dart';
 
 class PlanetsScreen extends StatelessWidget {
   final bool isFullScreenDialog;
@@ -24,7 +24,7 @@ class PlanetsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Enter a Planet'),
+                    border: OutlineInputBorder(), hintText: 'Enter a planet'),
 
                 // 3
                 onChanged: (query) => bloc.query(query),
@@ -48,7 +48,7 @@ class PlanetsScreen extends StatelessWidget {
         final results = snapshot.data;
 
         if (results == null) {
-          return Center(child: Text('Enter a Planet'));
+          return Center(child: Text('Enter a planet'));
         }
 
         if (results.isEmpty) {

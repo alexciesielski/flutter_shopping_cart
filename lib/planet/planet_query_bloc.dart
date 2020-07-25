@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter_shopping_cart/bloc.dart';
-import 'package:flutter_shopping_cart/planet_model.dart';
-import 'package:flutter_shopping_cart/swapi_response_model.dart';
+import 'package:flutter_shopping_cart/core/bloc.dart';
+import 'package:flutter_shopping_cart/core/swapi_response_model.dart';
+import 'package:flutter_shopping_cart/planet/planet_model.dart';
 import 'package:http/http.dart' as http;
 
 class PlanetQueryBloc implements Bloc {

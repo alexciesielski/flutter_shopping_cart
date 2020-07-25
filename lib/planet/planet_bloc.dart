@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_shopping_cart/bloc.dart';
-import 'package:flutter_shopping_cart/planet_model.dart';
+import 'package:flutter_shopping_cart/core/bloc.dart';
+import 'package:flutter_shopping_cart/planet/planet_model.dart';
 
 class PlanetBloc implements Bloc {
   Planet planet;

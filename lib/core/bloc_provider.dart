@@ -1,6 +1,6 @@
 // 1
 import 'package:flutter/widgets.dart';
-import 'package:flutter_shopping_cart/bloc.dart';
+import 'package:flutter_shopping_cart/core/bloc.dart';
 
 class BlocProvider<T extends Bloc> extends StatefulWidget {
   final Widget child;

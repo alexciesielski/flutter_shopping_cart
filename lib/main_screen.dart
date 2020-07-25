@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shopping_cart/bloc_provider.dart';
-import 'package:flutter_shopping_cart/planet_bloc.dart';
-import 'package:flutter_shopping_cart/planet_model.dart';
-import 'package:flutter_shopping_cart/planet_screen.dart';
+import 'package:flutter_shopping_cart/core/bloc_provider.dart';
+import 'package:flutter_shopping_cart/planet/planet_bloc.dart';
+import 'package:flutter_shopping_cart/planet/planet_model.dart';
+import 'package:flutter_shopping_cart/planet/planet_screen.dart';
 
 class MainScreen extends StatelessWidget {
   @override
