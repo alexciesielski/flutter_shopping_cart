@@ -7,6 +7,8 @@ class Planet {
   String population;
   String terrain;
 
+  bool favorite = false;
+
   Planet(
       {this.climate,
       this.diameter,

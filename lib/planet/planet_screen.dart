@@ -3,17 +3,17 @@ import 'package:flutter_shopping_cart/core/bloc_provider.dart';
 import 'package:flutter_shopping_cart/planet/planet_bloc.dart';
 import 'package:flutter_shopping_cart/planet/planet_model.dart';
 import 'package:flutter_shopping_cart/planet/planet_query_bloc.dart';
+import 'package:flutter_shopping_cart/planet_detail/planet_detail_screen.dart';
 
 class PlanetsScreen extends StatelessWidget {
   final bool isFullScreenDialog;
-  const PlanetsScreen({Key key, this.isFullScreenDialog = false})
+  const PlanetsScreen({Key key, this.isFullScreenDialog = false, this.bloc})
       : super(key: key);
+
+  final PlanetQueryBloc bloc;
 
   @override
   Widget build(BuildContext context) {
-    final bloc = PlanetQueryBloc();
-
-    // 2
     return BlocProvider<PlanetQueryBloc>(
       bloc: bloc,
       child: Scaffold(
@@ -44,7 +44,6 @@ class PlanetsScreen extends StatelessWidget {
     return StreamBuilder<List<Planet>>(
       stream: bloc.planetStream,
       builder: (context, snapshot) {
-        // 1
         final results = snapshot.data;
 
         if (results == null) {
@@ -61,22 +60,33 @@ class PlanetsScreen extends StatelessWidget {
   }
 
   Widget _buildSearchResults(List<Planet> results) {
-    // 2
     return ListView.separated(
       itemCount: results.length,
       separatorBuilder: (BuildContext context, int index) => Divider(),
       itemBuilder: (context, index) {
         final planet = results[index];
+        final favorite = planet.favorite ? "true" : "false";
         return ListTile(
-          title: Text(planet.name),
+          title: Text(planet.name + " " + favorite),
+          trailing: IconButton(
+            onPressed: () {
+              planet.favorite
+                  ? bloc.removeFavorite(planet)
+                  : bloc.addFavorite(planet);
+            },
+            icon:
+                Icon(planet.favorite ? Icons.favorite : Icons.favorite_border),
+          ),
           onTap: () {
             // 3
             final planetBloc = BlocProvider.of<PlanetBloc>(context);
             planetBloc.selectPlanet(planet);
-
-            if (isFullScreenDialog) {
-              Navigator.of(context).pop();
-            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      PlanetDetailScreen(planet: planet, bloc: bloc)),
+            );
           },
         );
       },
