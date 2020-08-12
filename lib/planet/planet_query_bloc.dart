@@ -9,20 +9,8 @@ import 'package:rxdart/rxdart.dart';
 
 class PlanetQueryBloc implements Bloc {
   final planetsController = BehaviorSubject<List<Planet>>();
-  final favoritesController = BehaviorSubject<List<String>>.seeded([]);
 
-  Stream<List<String>> get favoritesStream =>
-      favoritesController.stream.startWith([]);
-
-  Stream<List<Planet>> get planetStream =>
-      Rx.combineLatest2(planetsController.stream, favoritesStream,
-          (List<Planet> planets, List<String> favorites) {
-        for (var planet in planets) {
-          planet.favorite = favorites.contains(planet.name);
-        }
-
-        return planets;
-      });
+  Stream<List<Planet>> get planetStream => planetsController.stream;
 
   final url = "https://swapi.dev/api/planets";
 
@@ -45,21 +33,8 @@ class PlanetQueryBloc implements Bloc {
     }
   }
 
-  void addFavorite(Planet planet) {
-    final favorites = favoritesController.value;
-    favorites.add(planet.name);
-    favoritesController.sink.add(favorites);
-  }
-
-  void removeFavorite(Planet planet) {
-    final favorites = favoritesController.value;
-    favorites.remove(planet.name);
-    favoritesController.sink.add(favorites);
-  }
-
   @override
   dispose() {
     planetsController.close();
-    favoritesController.close();
   }
 }
